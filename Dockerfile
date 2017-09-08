@@ -4,7 +4,7 @@ MAINTAINER Sami Mäkelä
 ENV PATH="${PATH}"
 
 RUN apt-get update && \
-  apt-get install -y coq wget gcc ocaml opam libzarith-ocaml-dev m4 pkg-config zlib1g-dev && \
+  apt-get install -y wget ocaml opam libzarith-ocaml-dev m4 pkg-config zlib1g-dev && \
   opam init -y
 
 RUN git clone https://github.com/mrsmkl/spec webasm && \
@@ -14,7 +14,7 @@ RUN git clone https://github.com/mrsmkl/spec webasm && \
    make && \
    ./wasm -m ../test/core/fac.wast
 
-RUN apt-get install npm && \
+RUN apt-get install -y npm && \
   ln -s /usr/bin/nodejs /bin/node && \
   npm install -g ethereumjs-testrpc && \
   cd bin && \
@@ -23,5 +23,6 @@ RUN apt-get install npm && \
   chmod 744 solc
 
 RUN cd webasm/solidity && \
+  npm install web3 && \
   ./test.sh
 
