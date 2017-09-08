@@ -1,7 +1,7 @@
 FROM ubuntu:17.04
 MAINTAINER Sami Mäkelä
 
-ENV PATH="${PATH}"
+ENV PATH="${PATH}:/node-v6.11.3-linux-x64/bin"
 
 RUN apt-get update && \
   apt-get install -y wget ocaml opam libzarith-ocaml-dev m4 pkg-config zlib1g-dev && \
@@ -14,8 +14,9 @@ RUN git clone https://github.com/mrsmkl/spec webasm && \
    make && \
    ./wasm -m ../test/core/fac.wast
 
-RUN apt-get install -y npm && \
-  ln -s /usr/bin/nodejs /bin/node && \
+RUN apt-get install -y curl && \
+  curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+  apt-get install -y nodejs && \
   npm install -g ethereumjs-testrpc && \
   cd bin && \
   wget https://github.com/ethereum/solidity/releases/download/v0.4.16/solc-static-linux && \
