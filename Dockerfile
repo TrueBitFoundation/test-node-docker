@@ -51,11 +51,17 @@ RUN git clone https://github.com/TrueBitFoundation/webasm-solidity && \
 
 # ENV PATH="${PATH}:/node-v6.11.3-linux-x64/bin"
 
+RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.2-1db4ecdc.tar.gz && \
+  tar xf geth-linux-amd64-1.7.2-1db4ecdc.tar.gz && \
+  cp geth-linux-amd64-1.7.2-1db4ecdc/geth /bin/geth
+
 RUN cd webasm-solidity && \
+  git pull && \
+  git pull && \
   cp app.html /var/www/html/index.html && \
   cp socketio.js /var/www/html/
 
 EXPOSE 80 22448 4001
 
-ENTRYPOINT cd webasm-solidity && sh testnet.sh
+ENTRYPOINT cd webasm-solidity && sh rinkeby.sh
 
