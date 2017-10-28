@@ -24,9 +24,7 @@ RUN eval `opam config env` && \
    opam install cryptokit yojson -y
 
 RUN wget -O getparity.sh https://get.parity.io && \
-   bash getparity.sh && \
-   echo plort > supersecret.txt && \
-   parity --chain kovan account new --password=supersecret.txt > myaddress
+   bash getparity.sh
 
 #   && \
 #   (parity --chain dev &) && \
@@ -54,11 +52,10 @@ RUN git clone https://github.com/TrueBitFoundation/webasm-solidity && \
 # ENV PATH="${PATH}:/node-v6.11.3-linux-x64/bin"
 
 RUN cd webasm-solidity && \
-  git pull && \
   cp app.html /var/www/html/index.html && \
   cp socketio.js /var/www/html/
 
-EXPOSE 80 22448
+EXPOSE 80 22448 4001
 
-ENTRYPOINT cd webasm-solidity &&  sh testnet.sh
+ENTRYPOINT cd webasm-solidity && sh testnet.sh
 
