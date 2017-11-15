@@ -37,16 +37,17 @@ RUN wget -O getparity.sh https://get.parity.io && \
 #   make && \
 #   ./wasm -m ../test/core/fac.wast
 
-RUN git clone https://github.com/TrueBitFoundation/webasm-solidity && \
+RUN git clone https://github.com/mrsmkl/webasm-solidity && \
   cd webasm-solidity && \
-  git checkout testnet && \
+  git pull && \
   git submodule init && \
   git submodule update && \
   cd ocaml-offchain/interpreter && \
   eval `opam config env` && \
   make && \
-  cd ../.. && \
+  cd ../../node && \
   npm install && \
+  cd .. && \
   ./compile.sh
 
 # ENV PATH="${PATH}:/node-v6.11.3-linux-x64/bin"
@@ -55,7 +56,9 @@ RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.2-1
   tar xf geth-linux-amd64-1.7.2-1db4ecdc.tar.gz && \
   cp geth-linux-amd64-1.7.2-1db4ecdc/geth /bin/geth
 
-RUN cd webasm-solidity && \
+RUN cd webasm-solidity/node && \
+  git pull && \
+  git pull && \
   cp app.html /var/www/html/index.html && \
   cp socketio.js /var/www/html/
 
