@@ -55,6 +55,7 @@ RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.2-1
   cp geth-linux-amd64-1.7.2-1db4ecdc/geth /bin/geth
 
 RUN cd webasm-solidity/node && \
+  git pull && \
   cp app.html /var/www/html/index.html && \
   cp socketio.js /var/www/html/
 
