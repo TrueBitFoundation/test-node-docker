@@ -39,8 +39,7 @@ RUN wget -O getparity.sh https://get.parity.io && \
 
 RUN git clone https://github.com/mrsmkl/webasm-solidity && \
   cd  webasm-solidity && \
-  chmod 755 kovan.sh && \
-  chmod 755 rinkeby.sh && \
+  chmod 755 kovan.sh dev.sh rinkeby.sh && \
   git submodule init && \
   git submodule update && \
   cd ocaml-offchain/interpreter && \
