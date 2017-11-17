@@ -17,3 +17,5 @@ Rinkeby testnet:
 docker run --name truebit -ti -v -v /srv/gethdata:/root/.ethereum -p 4001:4001 -p 22449:80 -p 22448:22448 mrsmkl/webasm-test-docker:latest /webasm-solidity/rinkeby.sh
 ```
 
+On the testnets, you have to wait until the ethereum clients have synced. You also have to send them test ether to make them work.
+
