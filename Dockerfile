@@ -24,7 +24,7 @@ RUN eval `opam config env` && \
    opam install cryptokit yojson -y
 
 RUN wget -O getparity.sh https://get.parity.io && \
-   bash getparity.sh
+   bash getparity.sh -r stable
 
 #   && \
 #   (parity --chain dev &) && \
@@ -38,8 +38,9 @@ RUN wget -O getparity.sh https://get.parity.io && \
 #   ./wasm -m ../test/core/fac.wast
 
 RUN git clone https://github.com/mrsmkl/webasm-solidity && \
-  cd webasm-solidity && \
-  git pull && \
+  cd  webasm-solidity && \
+  chmod 755 kovan.sh && \
+  chmod 755 rinkeby.sh && \
   git submodule init && \
   git submodule update && \
   cd ocaml-offchain/interpreter && \
@@ -57,12 +58,10 @@ RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.2-1
   cp geth-linux-amd64-1.7.2-1db4ecdc/geth /bin/geth
 
 RUN cd webasm-solidity/node && \
-  git pull && \
-  git pull && \
   cp app.html /var/www/html/index.html && \
   cp socketio.js /var/www/html/
 
 EXPOSE 80 22448 4001
 
-ENTRYPOINT cd webasm-solidity && sh rinkeby.sh
+# ENTRYPOINT cd webasm-solidity && sh rinkeby.sh
 
