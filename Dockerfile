@@ -37,7 +37,6 @@ RUN wget -O getparity.sh https://get.parity.io && \
 
 RUN git clone https://github.com/mrsmkl/webasm-solidity && \
   cd  webasm-solidity && \
-  chmod 755 kovan.sh dev.sh rinkeby.sh && \
   git submodule init && \
   git submodule update && \
   cd ocaml-offchain/interpreter && \
@@ -54,8 +53,10 @@ RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.2-1
   tar xf geth-linux-amd64-1.7.2-1db4ecdc.tar.gz && \
   cp geth-linux-amd64-1.7.2-1db4ecdc/geth /bin/geth
 
-RUN cd webasm-solidity/node && \
+RUN cd webasm-solidity && \
   git pull && \
+  chmod 755 kovan.sh dev.sh rinkeby.sh && \
+  cd node && \
   cp app.html /var/www/html/index.html && \
   cp socketio.js /var/www/html/
 
