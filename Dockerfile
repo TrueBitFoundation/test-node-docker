@@ -24,12 +24,10 @@ RUN eval `opam config env` && \
    opam install cryptokit yojson -y
 
 RUN wget -O getparity.sh https://get.parity.io && \
-   bash getparity.sh -r stable
-
-#   && \
-#   (parity --chain dev &) && \
-#   sleep 10 && \
-#   killall parity
+   bash getparity.sh -r stable && \
+   (parity --chain dev &) && \
+   sleep 10 && \
+   killall parity
 
 #RUN git clone https://github.com/TrueBitFoundation/ocaml-offchain webasm && \
 #   cd webasm/interpreter && \
